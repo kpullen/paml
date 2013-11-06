@@ -6,10 +6,6 @@ module Paml
 		def initialize options = {}
 			@level = (options[:whitespace] || "").scan(/\t/).size
 
-			tag = options[:tag] || "div"
-			@tag = "<#{tag}>"
-			@postamble = "</#{tag}>"
-
 			@attributes = Hash[
 					*(options[:attributes] || "")
 					.split(",")
@@ -18,13 +14,17 @@ module Paml
 			@attributes["id"] = options[:id] if options[:id]
 			@attributes["class"] = options[:class] if options[:class]
 
+			tag = options[:tag] || "div"
+			@tag = "<#{tag}#{" " unless @attributes.empty?}#{@attributes.map {|k, v| "#{k}='#{v}'"}.join(" ").strip}>"
+			@postamble = "</#{tag}>"
+
 			@content = (options[:content] || "").strip
 
 			@children = []
 		end
 
 		def to_s
-			[@tag, @content, @postamble].join
+			[@tag, @content, @children.map(&:to_s), @postamble].flatten.join
 		end
 
 		def << child
