@@ -4,9 +4,14 @@ include Paml
 describe Node do
 	it("has a level") { Node.new(whitespace: "\t").level.should eq 1 }
 	it("only accepts tabs as whitespace") { Node.new(whitespace: " ").level.should eq 0 }
-	it("has a tag") { Node.new(tag: "p").tag.should eq "p" }
-	it("returns 'div' when no tag is specified") { expect(Node.new.tag).to eq "div" }
-	it("has attributes") { expect(Node.new(attributes: "a: 1, b: 2").attributes).to eq("a" => "1", "b" => "2") }
-	it("has content") { expect(Node.new(content: "hello").content).to eq "hello" }
-	it("returns '' when no content is specified") { expect(Node.new.content).to eq "" }
+
+	it("is a div by default") { Node.new.tag.should eq "<div>" }
+
+	it("has attributes") { Node.new(attributes: "a: 1, b: 2").attributes.should eq("a" => "1", "b" => "2") }
+
+	it("has content") { Node.new(content: "hello").content.should eq "hello" }
+	it("has blank content by default") { Node.new.content.should eq "" }
+
+	it("has an opening tag") { Node.new(tag: "p").tag.should eq "<p>" }
+	it("has a closing tag") { Node.new(tag: "p").postamble.should eq "</p>" }
 end
