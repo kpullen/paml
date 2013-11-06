@@ -14,4 +14,13 @@ describe Node do
 
 	it("has an opening tag") { Node.new(tag: "p").tag.should eq "<p>" }
 	it("has a closing tag") { Node.new(tag: "p").postamble.should eq "</p>" }
+
+	it("can become a string") { Node.new(tag: "p").to_s.should eq "<p></p>" }
+	
+	it("has children") do
+		parent = Node.new
+		child = Node.new
+		parent << child
+		parent.children.size.should eq 1
+	end
 end

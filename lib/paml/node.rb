@@ -2,7 +2,7 @@ module Paml
 	# I am a Node in the Paml parse tree.
 	# I have an indentation level, a tag, some attributes, and maybe some content
 	class Node
-		attr_reader :level, :tag, :attributes, :content, :postamble
+		attr_reader :level, :tag, :attributes, :content, :postamble, :children
 		def initialize options = {}
 			@level = (options[:whitespace] || "").scan(/\t/).size
 
@@ -19,6 +19,16 @@ module Paml
 			@attributes["class"] = options[:class] if options[:class]
 
 			@content = (options[:content] || "").strip
+
+			@children = []
+		end
+
+		def to_s
+			[@tag, @content, @postamble].join
+		end
+
+		def << child
+			@children << child
 		end
 	end
 end
