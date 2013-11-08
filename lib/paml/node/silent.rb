@@ -3,13 +3,15 @@ module Paml
 		def initialize options = {}
 			super options
 			terminator = ?;
-			@outro = ""
+			outro = ""
 			@content.scan /^(if|foreach|while)/ do |match|
-				@outro = "<?php end#{match.first}; ?>"
+				outro = "<?php end#{match.first}; ?>"
 				terminator = ?:
 			end
 			terminator = ?: if /^(else(?:\s+if)?)/.match @content
-			@intro = "<?php #{@content}#{terminator} ?>"
+			@tag = Tag::Script.new
+			@tag.intro = "<?php #{@content}#{terminator} ?>"
+			@tag.outro = outro
 			@content = nil
 		end
 	end

@@ -7,6 +7,9 @@ module Paml
 				@content = nil
 				@outro = nil
 			end
+			def to_s
+				@children.map(&:to_s).join
+			end
 		end
 	end
 end

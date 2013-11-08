@@ -4,8 +4,9 @@ module Paml
 		class Noisy < Lonely
 			def initialize options = {}
 				super options
-				@intro = "<?php echo #{options[:content] || ""}; ?>"
-				@outro = nil
+				@tag = Tag::Script.new
+				@tag.intro = "<?php echo #{options[:content] || ""}; ?>"
+				@tag.outro = ""
 				@content = nil
 			end
 		end

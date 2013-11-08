@@ -6,9 +6,8 @@ module Paml
 			def initialize options = {}
 				super options
 				@content = ""
-				options[:tag] = ""
-				only_child = Node.from_hash options
-				@children = [only_child]
+				options.delete :tag
+				@children = [Node.from_hash(options)]
 			end
 
 			def << child
