@@ -1,20 +1,16 @@
 module Paml
 	class Tag
-		def initialize options = {}
-			name = options[:name]
-			attributes = options[:attributes] || {}
-			spacer = " " unless attributes.empty?
-			formatted_attributes = attributes
+		def initialize name, attributes = {}
+			attribute_string = (attributes || {})
 					.map {|k, v| "#{k}='#{v}'"}
 					.join(" ")
 					.strip
-
-			@intro = "<#{name}#{spacer}#{formatted_attributes}>"
+			@intro = "<#{[name, attribute_string].join(" ").strip}>"
 			@outro = "</#{name}>"
 		end
 
 		def wrap_around content
-			[@intro, content, @outro].join ""
+			[@intro, content, @outro].join
 		end
 	end
 end
