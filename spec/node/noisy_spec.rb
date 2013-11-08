@@ -1,7 +1,6 @@
 require "spec_helper"
 
 describe Node::Noisy do
-	subject { Node::Noisy.new content: "$thing" }
-	it("echos everything") { subject.intro.should eq "<?php echo $thing; ?>" }
-	it("has no outro") { subject.outro.should eq nil }
+	subject { Node::Noisy.new(content: "$thing").to_s }
+	it { should eq "<?php echo $thing; ?>" }
 end

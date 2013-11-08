@@ -6,6 +6,7 @@ module Paml
 				super options
 				@intro = "<?php echo #{options[:content] || ""}; ?>"
 				@outro = nil
+				@content = nil
 			end
 		end
 	end

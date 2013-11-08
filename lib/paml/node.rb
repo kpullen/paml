@@ -1,8 +1,6 @@
 module Paml
 	# I am a Node in the Paml parse tree.
 	# I have an indentation level.
-	# I have an opening and closing tag (called intro and outro).
-	# I might have some content.
 	# I may have children; I'll adopt anyone you send me via #<<
 	class Node
 
@@ -26,23 +24,27 @@ module Paml
 			self.new options
 		end
 
-		attr_reader :level, :intro, :outro, :content, :children
+		attr_reader :level, :children
 		def initialize options = {}
-			@level = options[:level]
+			@level = options[:level] || 0
 
 			tag = options[:tag] || "div"
 			attributes = options[:attributes] || {}
 			spacer = " " unless attributes.empty?
-			formatted_attributes =
-				attributes
-				.map {|k, v| "#{k}='#{v}'"}
-				.join(" ")
-				.strip
+			formatted_attributes = attributes
+					.map {|k, v| "#{k}='#{v}'"}
+					.join(" ")
+					.strip
 
 			@intro = "<#{tag}#{spacer}#{formatted_attributes}>"
 			@outro = "</#{tag}>"
 			@content = (options[:content] || "").strip
 			@children = []
+		end
+
+		def level_up
+			@level += 1
+			self
 		end
 
 		def to_s
