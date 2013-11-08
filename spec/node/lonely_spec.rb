@@ -1,5 +1,4 @@
 require "spec_helper"
-include Paml
 
 describe Node::Lonely do
 	subject { Node::Lonely.new }

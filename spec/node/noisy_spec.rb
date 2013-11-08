@@ -1,5 +1,4 @@
 require "spec_helper"
-include Paml
 
 describe Node::Noisy do
 	subject { Node::Noisy.new content: "$thing" }

@@ -1,5 +1,4 @@
 require "spec_helper"
-include Paml
 
 describe Node do
 	context "when constructing nodes" do

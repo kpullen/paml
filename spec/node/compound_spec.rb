@@ -1,5 +1,4 @@
 require "spec_helper"
-include Paml
 
 describe Node::Compound do
 	subject { Node::Compound.new ctype: "-" }

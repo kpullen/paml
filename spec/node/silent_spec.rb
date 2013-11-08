@@ -1,5 +1,4 @@
 require "spec_helper"
-include Paml
 
 describe Silent do
 	let(:_other) { Silent.new content: "method()" }
