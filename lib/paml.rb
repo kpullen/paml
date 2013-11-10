@@ -1,25 +1,32 @@
 require "paml/version"
+require "paml/line"
 require "paml/stream"
 require "paml/node"
 require "paml/tag"
 
 module Paml
-	HAML_PATTERN = /
-		# In HAML, the whitespace between the beginning of a line and an
+	PATTERN = /
+		# In Paml, the whitespace between the beginning of a line and an
 		# element definition determines the element's depth in the tree
 		# generated from the haml source.
-		^(?<whitespace>\s*)
-		# A tag can be specified 
+		^(?<whitespace>\t*)
+		# A tag can be named by prepending the name with a percent sign (%).
 		(?:%(?<tag>\w+))?
-		#
+		# Paml provides a shortcut for specifying an element's ID.
 		(?:\#(?<id>\w+))?
-		# The class of the element
+		# Paml also provides a shortcut for specifying an element's class.
 		(?:\.(?<class>\w+))?
-		# The element attributes
+		# Arbitrary attributes can be given in a ruby-like fashion; simply separate
+		# keys and values with a colon (:), seperate key-value pairs with a comma
+		# (,), and wrap the whole thing in curly braces ({}).
 		(?:\{(?<attributes>.*?)\})?
-		# The type of content
+		# Content can be added to the end of a line, but if a tag name, id, or
+		# class has been given you must specify the KIND of content at the end of
+		# the line. If you give a dash (-) or equal-sign (=) then Paml will treat
+		# your content as PHP code; the only difference is that anything after an
+		# equal-sign will be echoed.
 		(?<content_type>-|=)?
-		# The content
+		# The content.
 		(?<content>.*?)$
 	/x
 end
