@@ -1,24 +1,9 @@
 module Paml
 	class Stream
 		def initialize data
-			regex = /
-				# In HAML, the whitespace between the beginning of a line and an
-				# element definition determines the element's depth.
-				^(?<whitespace>\s*)
-				(?:%(?<tag>\w+))?
-				(?:\#(?<id>\w+))?
-				# The class of the element
-				(?:\.(?<class>\w+))?
-				# The element attributes
-				(?:\{(?<attributes>.*?)\})?
-				# The type of content
-				(?<content_type>-|=)?
-				# The content
-				(?<content>.*?)$
-			/x
 			data = data.split "\n" if data.is_a? String
 			@lines = data.map do |line|
-				Node.new regex.match line
+				Node.new HAML_PATTERN.match line
 			end
 		end
 
