@@ -1,5 +1,4 @@
 require "spec_helper"
-require "paml/line"
 
 describe Paml::Line do
 	context "when considering default values" do
