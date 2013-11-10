@@ -18,8 +18,8 @@ module Paml
 					.split(",")
 					.map {|kv| kv.split(":").map {|x| x.strip } }
 					.flatten]
-			@attributes["id"] = options[:id] if options[:id]
-			@attributes["class"] = options[:class] if options[:class]
+			@attributes[:id] = options[:id] if options[:id]
+			@attributes[:class] = options[:class] if options[:class]
 		end
 	end
 end
