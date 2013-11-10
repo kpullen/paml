@@ -29,4 +29,16 @@ module Paml
 		# The content.
 		(?<content>.*?)$
 	/x
+
+	def generate! stream, tree = Node::Root.new
+		node = stream.next
+		tree << node
+		if stream.level > tree.level
+			generate! stream, node 
+		elsif stream.level == tree.level
+			generate! stream, tree
+		end
+	rescue
+		tree.to_s
+	end
 end

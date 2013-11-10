@@ -2,7 +2,7 @@ module Paml
 	class Stream
 		def initialize data
 			data = data.split "\n" if data.is_a? String
-			@lines = data.map do |raw_line|
+			@nodes = data.map do |raw_line|
 				match = PATTERN.match raw_line
 				data = Hash[
 					match
@@ -15,11 +15,13 @@ module Paml
 		end
 
 		def next
-			@lines.shift
+			raise if @nodes.empty?
+			@nodes.shift
 		end
 
 		def level
-			@lines[0].level
+			raise if @nodes.empty?
+			@nodes.first.level
 		end
 	end
 end

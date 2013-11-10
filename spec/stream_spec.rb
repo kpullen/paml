@@ -15,9 +15,10 @@ describe Stream do
 			expect(node.to_s).to eq "<div id='first'></div>"
 		end
 
-		it "can be drained" do
+		it "will raise an error when fully drained" do
 			2.times { subject.next }
-			expect(subject.next).to be_nil
+			expect {subject.next}.to raise_error
+			expect {subject.level}.to raise_error
 		end
 	end
 end
