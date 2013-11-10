@@ -6,32 +6,27 @@ require "paml/node/compound"
 
 module Paml
 	class Node
-		def self.from_hash options
-			options[:level] = (options[:whitespace] || "").scan(/\t/).size
+		class << self
+			def from_line line
+				ObjectSpace
+					.each_object(Class)
+					.select {|klass| klass < self }
+					.detect(-> {Node}) {|klass| klass.accept? line }
+					.new line
+			end
 
-			options[:attributes] = Hash[
-					*(options[:attributes] || "")
-					.split(",")
-					.map {|kv| kv.split(":").map {|x| x.strip } }
-					.flatten]
-			options[:attributes]["id"] = options[:id] if options[:id]
-			options[:attributes]["class"] = options[:class] if options[:class]
-
-			self.new options
+			def accept? _
+				false
+			end
 		end
 
 		attr_reader :level, :children
 
-		def initialize options = {}
+		def initialize line = Line.new
 			@children = []
-			options = {
-				level: 0,
-				tag: "div",
-				attributes: {},
-				content: ""}.merge options
-			@level = options[:level]
-			@tag = Tag.new options[:tag], options[:attributes]
-			@content = options[:content].strip
+			@level = line.level
+			@tag = Tag.new line.tag, line.attributes
+			@content = line.content
 		end
 
 		def level_up

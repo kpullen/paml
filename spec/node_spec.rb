@@ -4,10 +4,10 @@ describe Paml::Node do
 	context "when constructing nodes" do
 		context "when accepting pre-element whitespace" do
 			it "accepts tabs" do
-				expect(Node.from_hash(whitespace: "\t").level).to eq 1
+				expect(Paml::Node.from_line(Line.new whitespace: "\t").level).to eq 1
 			end
 			it "doesn't accept spaces" do
-				expect(Node.from_hash(whitespace: " ").level).to eq 0
+				expect(Node.from_line(Line.new whitespace: " ").level).to eq 0
 			end
 		end
 	end
@@ -21,7 +21,8 @@ describe Paml::Node do
 
 	context "when considering levels" do
 		it "has a level" do
-			expect(Node.new(level: 10).level).to eq 10
+			line = Line.new whitespace: "\t" * 10
+			expect(Node.new(line).level).to eq 10
 		end
 
 		it "can level up" do

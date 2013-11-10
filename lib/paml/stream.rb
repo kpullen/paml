@@ -12,7 +12,7 @@ module Paml
 				# The element attributes
 				(?:\{(?<attributes>.*?)\})?
 				# The type of content
-				(?<ctype>-|=)?
+				(?<content_type>-|=)?
 				# The content
 				(?<content>.*?)$
 			/x

@@ -1,8 +1,8 @@
 module Paml
 	class Node
 		class Silent < Node
-			def initialize options = {}
-				super options
+			def initialize line
+				super line
 				terminator = ?;
 				outro = nil
 				@content.scan /^(if|foreach|while)/ do |match|

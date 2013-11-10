@@ -1,9 +1,9 @@
 module Paml
 	class Node
 		class Noisy < Node
-			def initialize options = {}
-				super options
-				@tag = Tag::Script.new "echo #{options[:content] || ""};"
+			def initialize line = Line.new
+				super line
+				@tag = Tag::Script.new "echo #{line.content};"
 				@content = nil
 			end
 		end
