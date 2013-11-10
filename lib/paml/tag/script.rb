@@ -1,9 +1,9 @@
 module Paml
 	class Tag
 		class Script < Tag
-			attr_writer :intro, :outro
-			def initialize
-				super "", {}
+			def initialize intro, outro = nil
+				@intro = "<?php #{intro} ?>"
+				@outro = "<?php #{outro} ?>" unless outro.nil?
 			end
 		end
 	end

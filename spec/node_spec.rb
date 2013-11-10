@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Node do
+describe Paml::Node do
 	context "when constructing nodes" do
 		context "when accepting pre-element whitespace" do
 			it "accepts tabs" do
@@ -12,15 +12,22 @@ describe Node do
 		end
 	end
 
+	context "when using defaults" do
+		subject { Node.new }
+		it("is a div") { expect(subject.to_s).to eq "<div></div>" }
+		it("starts at level 0") { expect(subject.level).to eq 0 }
+		it("has no children") { expect(subject.children).to eq [] }
+	end
+
 	context "when considering levels" do
 		it "has a level" do
 			expect(Node.new(level: 10).level).to eq 10
 		end
 
-		subject { Node.new }
 		it "can level up" do
-			subject.level_up
-			expect(subject.level).to eq 1
+			basic = Node.new
+			basic.level_up
+			expect(basic.level).to eq 1
 		end
 	end
 

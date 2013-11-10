@@ -8,5 +8,7 @@ describe Node::Root do
 		node
 	end
 	
-	it("prints its children") { with_child.to_s.should eq "<div></div>" }
+	it "prints its children" do
+		with_child.to_s.should eq "<div></div>"
+	end
 end

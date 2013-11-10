@@ -1,3 +1,9 @@
+require "paml/node/root"
+require "paml/node/silent"
+require "paml/node/noisy"
+require "paml/node/lonely"
+require "paml/node/compound"
+
 module Paml
 	class Node
 		def self.from_hash options
@@ -15,6 +21,7 @@ module Paml
 		end
 
 		attr_reader :level, :children
+
 		def initialize options = {}
 			@children = []
 			options = {

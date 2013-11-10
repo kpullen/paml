@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Silent do
-	let(:_other) { Silent.new content: "method()" }
-	let(:_if) { Silent.new content: "if(true)" }
-	let(:_else_if) { Silent.new content: "else if(true)" }
-	let(:_else) { Silent.new content: "else" }
-	let(:_foreach) { Silent.new content: "foreach($things as $thing)" }
-	let(:_while) { Silent.new content: "while(true)" }
+describe Node::Silent do
+	let(:_other) { Node::Silent.new content: "method()" }
+	let(:_if) { Node::Silent.new content: "if(true)" }
+	let(:_else_if) { Node::Silent.new content: "else if(true)" }
+	let(:_else) { Node::Silent.new content: "else" }
+	let(:_foreach) { Node::Silent.new content: "foreach($things as $thing)" }
+	let(:_while) { Node::Silent.new content: "while(true)" }
 
 	it "handles non control flow stuff" do
 		expect(_other.to_s).to eq "<?php method(); ?>"
