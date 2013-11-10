@@ -11,6 +11,10 @@ describe Node::Root do
 	it "has no tag" do
 		expect(pristine).to eq ""
 	end
+
+	it "is always level 0" do
+		expect(Node::Root.new.level).to eq 0
+	end
 	
 	it "may have children" do
 		expect(with_child).to eq "<div></div>"

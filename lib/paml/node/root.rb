@@ -2,6 +2,7 @@ module Paml
 	class Node
 		class Root < Node
 			def initialize
+				@level = 0
 				@children = []
 			end
 			def to_s
