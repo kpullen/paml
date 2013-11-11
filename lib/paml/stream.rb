@@ -1,5 +1,7 @@
 module Paml
 	class Stream
+		class StreamIsEmpty < Exception; end
+
 		def initialize data
 			data = data.split "\n" if data.is_a? String
 			@nodes = data.map do |raw_line|
@@ -15,13 +17,17 @@ module Paml
 		end
 
 		def next
-			raise if @nodes.empty?
-			@nodes.shift
+		 	safely { @nodes.shift }
 		end
 
 		def level
-			raise if @nodes.empty?
-			@nodes.first.level
+			safely { @nodes.first.level }
+		end
+
+		private
+		def safely &block
+			raise StreamIsEmpty if @nodes.empty?
+			yield
 		end
 	end
 end

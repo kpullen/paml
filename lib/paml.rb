@@ -38,7 +38,7 @@ module Paml
 		elsif stream.level == tree.level
 			generate! stream, tree
 		end
-	rescue
+	rescue Stream::StreamIsEmpty => _
 		tree.to_s
 	end
 end
