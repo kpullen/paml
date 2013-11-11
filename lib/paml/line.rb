@@ -16,7 +16,10 @@ module Paml
 			@attributes = Hash[
 					*(options[:attributes] || "")
 					.split(",")
-					.map {|kv| kv.split(":").map {|x| x.strip } }
+					.map do |kv|
+						key, value = kv.split(":").map {|x| x.strip }
+						[key.to_sym, value]
+					end
 					.flatten]
 			@attributes[:id] = options[:id] if options[:id]
 			@attributes[:class] = options[:class] if options[:class]
